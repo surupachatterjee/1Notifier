@@ -1,0 +1,134 @@
+<!-- Side bar code --->
+<div class="sidebar" data-color='red' data-image="">
+  <div class="logo">
+    <a href="javascript:void(0)" class="simple-text">
+      <div class="logo-img">
+        <img src="/assets/img/angular2-logo-red.png"/>
+      </div>
+      1Notifier
+    </a>
+  </div>
+  <div class="sidebar-wrapper">
+    <form class="navbar-form navbar-right" role="search" *ngIf="isMobileMenu()">
+      <div class="form-group form-black is-empty">
+        <input type="text" class="form-control" placeholder="Search">
+        <span class="material-input"></span>
+      </div>
+      <button type="submit" class="btn btn-white btn-round btn-just-icon">
+        <i class="material-icons">search</i>
+        <div class="ripple-container"></div>
+      </button>
+    </form>
+
+    <ul class="nav nav-mobile-menu" *ngIf="isMobileMenu()">
+      <li>
+        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">dashboard</i>
+          <p class="hidden-lg hidden-md">Dashboard</p>
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">notifications</i>
+          <span class="notification">5</span>
+          <p class="hidden-lg hidden-md">Notifications</p>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Mike John responded to your email</a></li>
+          <li><a href="#">You have 5 new tasks</a></li>
+          <li><a href="#">You're now friend with Andrew</a></li>
+          <li><a href="#">Another Notification</a></li>
+          <li><a href="#">Another One</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">person</i>
+          <p class="hidden-lg hidden-md">Profile</p>
+        </a>
+      </li>
+    </ul>
+
+    <div class="nav-container">
+      <ul class="nav">
+        <li class="active">
+          <a href="javascript:void(0)" (click)="isAddApplication = true">
+            <i class="material-icons">add</i>
+            <p>Add application</p>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" routerLink="/facebook-details" routerLinkActive="active">
+            <img
+              src="http://aruba.i.lithium.com/t5/image/serverpage/image-id/21623iBCD90AD2FCEA6FBE/image-size/original?v=mpbl-1&px=-1"
+              class="img-small"> &nbsp; &nbsp; Facebook
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------->
+
+<!-- add application code -->
+<div class="main-content">
+  <div class="col-sm-5 friendInfo" >
+      <h2>My Friends</h2>
+        <ul class="friends">
+          <li *ngFor="let friend of friends" (click)="onSelect(friend)"
+            [class.selected]="friend === selectedFriend">
+            <div class="row">
+              <div class="col-sm-3">
+                <img src={{friend.imageURL}} class="profile"/>
+              </div>
+              <div class="col-sm-9">
+                <h6>Name: {{friend.fname}} {{friend.lname}}</h6>
+                <h6>Friends Since: {{friend.friendsince}}</h6>
+                <div *ngIf="friend.isActive">
+                  <span class="label label-success">Online</span>
+                </div>
+                <div *ngIf="!friend.isActive">
+                  Last Seen: {{friend.lastSeen | date:'yyyy-MM-dd HH:mm'}}
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+  </div>
+
+  <div *ngIf="selectedFriend" class="col-sm-7">
+    <h2>Chat History With: {{ selectedFriend.fname | uppercase }}</h2>
+      <div *ngIf="selectedFriend.messages">
+        <div class="friendMessage">
+            <img src={{selectedFriend.imageURL}} alt="Avatar" style="height:40px;width:40px">
+            <p>{{selectedFriend.messages}}</p>
+            <span class="time-right">now</span>
+        </div>
+      </div>
+
+      <div *ngIf="currentLoggedInUser.messages.length != 0" class="currentUserMessage" style="padding:2px">
+        <div *ngIf="currentLoggedInUser.messages.length != 0" class="currentUserMessage" style="padding:2px">
+            <ul>
+              <div class="friendMessage">
+                  <img src={{currentLoggedInUser.imageURL}} alt="Avatar" style="height:40px;width:40px">
+                  <li *ngFor="let message of currentLoggedInUser.messages">
+                    {{message}}
+                  </li>
+                  <span class="time-right">now</span>
+              </div>
+            </ul>
+        </div>
+      </div>
+
+      <div class="message-input-box" style="padding-top:2%">
+
+        <textarea type="text" class="userInput" placeholder="Type message..." [(ngModel)]='userMessage'>
+        </textarea>
+
+        <button type="submit" class="message-submit" (click)="sendMessage()">Send</button>
+      </div>
+  </div>
+
+
+</div>

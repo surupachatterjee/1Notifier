@@ -1,0 +1,247 @@
+<!-- Side bar code --->
+<div class="sidebar" data-color='red' data-image="">
+  <div class="logo">
+    <a href="javascript:void(0)" class="simple-text">
+      <div class="logo-img">
+        <img src="https://cdn0.iconfinder.com/data/icons/basic-ui-elements-colored/700/09_bell-3-512.png"
+             alt="1Notifier icon"/>
+      </div>
+      1Notifier
+    </a>
+  </div>
+  <div class="sidebar-wrapper">
+    <form class="navbar-form navbar-right" role="search" *ngIf="isMobileMenu()">
+      <div class="form-group form-black is-empty">
+        <input type="text" class="form-control" placeholder="Search">
+        <span class="material-input"></span>
+      </div>
+      <button type="submit" class="btn btn-white btn-round btn-just-icon">
+        <i class="material-icons">search</i>
+        <div class="ripple-container"></div>
+      </button>
+    </form>
+
+    <ul class="nav nav-mobile-menu" *ngIf="isMobileMenu()">
+      <li>
+        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">dashboard</i>
+          <p class="hidden-lg hidden-md">Dashboard</p>
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">notifications</i>
+          <span class="notification">5</span>
+          <p class="hidden-lg hidden-md">Notifications</p>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Mike John responded to your email</a></li>
+          <li><a href="#">You have 5 new tasks</a></li>
+          <li><a href="#">You're now friend with Andrew</a></li>
+          <li><a href="#">Another Notification</a></li>
+          <li><a href="#">Another One</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">person</i>
+          <p class="hidden-lg hidden-md">Profile</p>
+        </a>
+      </li>
+    </ul>
+
+    <div class="nav-container">
+      <ul class="nav">
+        <li class="active">
+          <a href="javascript:void(0)" (click)="isAddApplication = true">
+            <i class="material-icons">add</i>
+            <p>Add application</p>
+          </a>
+        </li>
+        <li *ngIf="isFacebookAdded">
+          <a href="javascript:void(0)" (click)="isAddApplication = false ;isFacebookClicked = true">
+            <img
+              src="http://aruba.i.lithium.com/t5/image/serverpage/image-id/21623iBCD90AD2FCEA6FBE/image-size/original?v=mpbl-1&px=-1"
+              class="img-small"> &nbsp; &nbsp; Facebook
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------->
+
+
+<!-- add application code -->
+<div class="main-content" *ngIf="isAddApplication">
+  <h1>Add Application</h1>
+  <div class="jumbotron">
+    <h2 class="display-3">Hello, there!</h2>
+    <p class="lead">You can link your social media applications to our platform and manage your notifications all in one
+      place! We will continue to support more applications in the future</p>
+    <hr class="my-4">
+    <p class="lead">
+      <button class="btn btn-info" data-toggle="modal" data-target="#myModal">
+        Add
+      </button>
+    </p>
+  </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------->
+
+<!-- add application modal -->
+<!-- Modal Core -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngIf="isAppList">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Applications</h4>
+      </div>
+      <hr>
+      <div class="nav-container">
+        <!-- Facebook success message -->
+        <div class="alert alert-success" *ngIf="isFacebookAdded">
+          <div class="container-fluid">
+            <div class="alert-icon">
+              <i class="material-icons">check</i>
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true"><i class="material-icons">clear</i></span>
+            </button>
+            <b>Awesome!</b> Facebook has been successfully linked to the platform
+          </div>
+        </div>
+        <!--Application list -->
+        <ul class="nav">
+          <li *ngIf="!isFacebookAdded">
+            <a href="javascript:void(0)" (click)="isFacebookLogin = true; isAppList = false">
+              <img
+                src="http://aruba.i.lithium.com/t5/image/serverpage/image-id/21623iBCD90AD2FCEA6FBE/image-size/original?v=mpbl-1&px=-1"
+                class="img-small"> &nbsp; &nbsp; <span class="bold-color">Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <img src="https://www.northeastern.edu/careers/wp-content/uploads/2012/10/CBpFkPaz.png" class="img-small">
+              &nbsp; &nbsp; LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <img src="https://timedotcom.files.wordpress.com/2014/03/gmail-logo1.jpg?quality=85" class="img-small">
+              &nbsp; &nbsp; Gmail
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-------------------------------------------------------------------------------------------------------->
+    <div class="modal-content" *ngIf="isFacebookLogin">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Facebook</h4>
+      </div>
+      <hr>
+      <div class="container">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="userId" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter user name or email" [(ngModel)]="userId">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="passwd" class="form-control" id="exampleInputPassword1"
+                   placeholder="Enter Password" [(ngModel)]="password">
+          </div>
+          <button type="submit" class="btn btn-success" data-dismiss="modal"
+                  (click)="isFacebookAdded = true; isFacebookLogin=false; isAppList=true">Authorize
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function () {
+    $(".nav li").on("click", function () {
+      $(".nav li").removeClass("active");
+      $(this).addClass("active");
+    });
+
+  });
+
+</script>
+<!-------------------------------------------------------------------------------------------------------->
+
+<!-- Facebook content code -->
+
+<div class="main-content" *ngIf="isFacebookClicked">
+  <h1>Facebook</h1>
+  <h4 class="bold-color same-row">Notifications: </h4> &nbsp; &nbsp;
+  <label class="radio-inline bold-color"><input type="radio" name="optradio">On</label>
+  <label class="radio-inline bold-color"><input type="radio" name="optradio">Off</label>
+  &nbsp;&nbsp;
+  <button class="btn btn-info" data-toggle="modal" data-target="#doNotDisturbModal">
+    <i class="material-icons">timer</i>&nbsp;Do not disturb
+  </button>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-6 padding-left">
+      <a  routerLink="/facebook-chat" routerLinkActive="active">
+      <img src="http://downloadicons.net/sites/default/files/message-icon-84161.png" class="img-small"
+           alt="messages icon">
+      <span class="my-text text-padding-right"><b>Messages</b></span>
+      </a>
+    </div>
+    <div class="col-md-6 padding-left">
+      <img
+        src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-culture/027503-glossy-black-icon-culture-world1.png"
+        class="img-small" alt="messages icon">
+      <span class="my-text text-padding-right"><b>&nbsp; &nbsp;Feed</b></span>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------->
+
+<!-- Do not disturb modal -->
+<div class="modal fade" id="doNotDisturbModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Do not disturb</h4>
+      </div>
+      <hr>
+      <div class="container">
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="radio" class="form-control" name="dnd" id="rd1"> On &nbsp;&nbsp;
+            <input type="radio" class="form-control" name="dnd" id="rd1"> Off
+          </div>
+        </form>
+        <form>
+          <div class="form-group">
+            From: <input type="time"> &nbsp; &nbsp;
+            To: <input type="time">
+          </div>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-success" data-dismiss="modal">Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------->
